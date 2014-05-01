@@ -4,7 +4,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Color {
 
-	/**
+	
+     private int saraza;
+    
+         /**
 	 * Red.
 	 */
 	private int r;
