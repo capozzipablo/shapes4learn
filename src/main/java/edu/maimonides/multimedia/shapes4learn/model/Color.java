@@ -3,18 +3,6 @@ package edu.maimonides.multimedia.shapes4learn.model;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Color {
-
-    public int getSaraza() {
-        return saraza;
-    }
-
-    public void setSaraza(int saraza) {
-        this.saraza = saraza;
-    }
-
-	
-     private int saraza;
-    
          /**
 	 * Red.
 	 */
