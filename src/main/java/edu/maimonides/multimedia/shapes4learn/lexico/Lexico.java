@@ -15,13 +15,16 @@ public  class Lexico implements Interpreter {
     //Método de la interfaz Interpreter
     public void interpret(String code, ShapeAmbient ambient) throws CodeException{
         
+        //Se procesa el código fuente y se guarda en una lista los distintos lexemas
         ArrayList array = new ArrayList();    
         StringTokenizer tokens = new StringTokenizer(code);
 	while(tokens.hasMoreTokens()){
             array.add(code);
-            System.out.println(tokens.nextToken());
         }    
+        
+        //Se imprimen los lexemas
+        for(int i=0; i < array.size();i++){
+            System.out.println(array.get(i));
+        }
     } 
-    
-
 }

@@ -44,17 +44,8 @@ public class Main {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         }; 
-       //analisisLexico.interpret(codigo, ambiente);
-             ArrayList array = new ArrayList();    
-        StringTokenizer tokens = new StringTokenizer(codigo);
-	while(tokens.hasMoreTokens()){
-            array.add(codigo);
-        }    
-        
-        //recorro array e imprimo lexemas
-        for(int i =0; i < array.size();i++){
-            System.out.println(array.get(i));
-        }
-    
+       
+            //Invoco a la interfaz Interpreter
+            analisisLexico.interpret(codigo, ambiente);
     }
 }
