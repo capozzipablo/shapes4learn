@@ -1,7 +1,7 @@
 package edu.maimonides.multimedia.shapes4learn.interpreter;
 
 import java.io.IOException;
-import java.io.InputStream;
+//import java.io.InputStream;
 
 import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
 
@@ -14,7 +14,7 @@ import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
  * 
  */
 public interface Interpreter {
-
+//
 	/**
 	 * Interprets an entire source code.
 	 * 
@@ -37,5 +37,5 @@ public interface Interpreter {
 	 * @throws IOException
 	 *             If there is an issue accessing the stream.
 	 */
-	public void interpret(InputStream stream, ShapeAmbient ambient) throws CodeException, IOException;
+//	public void interpret(InputStream stream, ShapeAmbient ambient) throws CodeException, IOException;
 }

@@ -122,9 +122,9 @@ public class RegexInterpreter implements Interpreter {
 		}
 	}
 
-	@Override
-	public void interpret(InputStream stream, ShapeAmbient ambient) throws CodeException, IOException {
-		this.interpret(IOUtils.toString(stream), ambient);
-	}
+//	@Override
+//	public void interpret(InputStream stream, ShapeAmbient ambient) throws CodeException, IOException {
+//		this.interpret(IOUtils.toString(stream), ambient);
+//	}
 
 }
