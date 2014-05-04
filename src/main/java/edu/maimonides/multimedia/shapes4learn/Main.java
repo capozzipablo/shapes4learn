@@ -2,22 +2,30 @@ package edu.maimonides.multimedia.shapes4learn;
 
 import edu.maimonides.multimedia.shapes4learn.interpreter.CodeException;
 import edu.maimonides.multimedia.shapes4learn.lexico.Lexico;
-import edu.maimonides.multimedia.shapes4learn.model.shapes.Circle;
-import edu.maimonides.multimedia.shapes4learn.model.shapes.Rectangle;
-import edu.maimonides.multimedia.shapes4learn.model.shapes.Shape;
 import edu.maimonides.multimedia.shapes4learn.model.Color;
 import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
 import edu.maimonides.multimedia.shapes4learn.model.exceptions.InexistentShapeException;
+import edu.maimonides.multimedia.shapes4learn.model.shapes.Circle;
+import edu.maimonides.multimedia.shapes4learn.model.shapes.Rectangle;
+import edu.maimonides.multimedia.shapes4learn.model.shapes.Shape;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Main {
    
-    public static void main(String[] args) throws CodeException {
-        
-        Lexico analisisLexico = new Lexico();
-        String codigo = "setbase 5 + 4 in rectangle myrectangle1 ;";
+    public static void main(String[] args) throws CodeException, FileNotFoundException {
+                
+        Lexico analizadorLexico = new Lexico();
         ShapeAmbient ambiente = new ShapeAmbient() {
 
             @Override
@@ -44,9 +52,12 @@ public class Main {
             public Iterable<Shape> shapes() {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-        }; 
-       
-            //Invoco a la interfaz Interpreter
-            analisisLexico.interpret(codigo, ambiente);
+        };
+        String codigo = new String("create shape circle in  aloo");
+        
+        analizadorLexico.interpret(codigo, ambiente);
+                
+                
+    
     }
 }
