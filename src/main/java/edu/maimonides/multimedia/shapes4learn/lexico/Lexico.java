@@ -18,11 +18,7 @@ public  class Lexico implements Interpreter {
     public void interpret(String code, ShapeAmbient ambient) throws CodeException{
                     
                  ArrayList array = new ArrayList();  
-                 
-                 //Se definen ExpresionesRegulares
-                // Pattern expRegularMetodo = Pattern.compile("[create|setcolor|setbase|setheight|setradius|setposition]");  
-                 Pattern expRegularNumero = Pattern.compile("[0-9]+");
-                 
+                                                
                 //Se procesa el código fuente y se guarda en una lista los distintos lexemas
                 StringTokenizer tokens = new StringTokenizer(code);
                 while(tokens.hasMoreTokens()){
@@ -49,16 +45,29 @@ public  class Lexico implements Interpreter {
                        
                    }
                    
-                   //Evalua si el lexema es un id
-                   Pattern expRegularId = Pattern.compile("[a-zA-Z]+[^in][^shape][^rectangle][^circle][^create][^setcolor][^setbase][^setheight][^setradius][^setposition]");
-                   Matcher compara = expRegularId.matcher((CharSequence) array.get(i));
+                                      
+//                   //Evalua si el lexema es un id                  
+//                    if(!(array.get(i).equals("create")) && !(array.get(i).equals("setcolor")) && !(array.get(i).equals("setbase")) && !(array.get(i).equals("setheight")) && !(array.get(i).equals("setradius")) && !(array.get(i).equals("setposition")) && !(array.get(i).equals("shape")) && !(array.get(i).equals("rectangle")) && !(array.get(i).equals("circle")) && !(array.get(i).equals("+")) && !(array.get(i).equals("-")) && !(array.get(i).equals("*")) && !(array.get(i).equals("/")) && !(array.get(i).equals("(")) && !(array.get(i).equals(")")) && !(array.get(i).equals(";"))){
+//                           System.out.println(array.get(i)+"(id)");
+//                       }
+                
+                
+                    //Evalua si el lexema es un fin de sentencia
+                    if(array.get(i).equals(";")){
+                        System.out.println(array.get(i)+"(fin_sentencia)");
+                    }
+                
+                  //Evalua si el lexema es un numero
+                    Pattern expRegular = Pattern.compile("[0-9]+");
+                    Matcher compara = expRegular.matcher((CharSequence) array.get(i));
                     if (compara.matches()) {
-                           System.out.println(array.get(i)+"(id)");
-                           
+                           System.out.println(array.get(i)+"(numero)");
                     } 
-                    
-                   
-    }
+                
+                }
+                        
+                  
+    
 
  }
 

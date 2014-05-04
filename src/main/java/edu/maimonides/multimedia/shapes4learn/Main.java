@@ -53,7 +53,7 @@ public class Main {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         };
-        String codigo = new String("create shape circle in  holamundo");
+        String codigo = new String("create circle ; 450 in");
         
         analizadorLexico.interpret(codigo, ambiente);
             
