@@ -40,7 +40,7 @@ public  class Lexico implements Interpreter {
                                 
                 System.out.println("Cantidad de lexemas encontrados:"+ valor);
                 
-                //Se inicializan contadores para contar los tokens
+                //Se inicializa  el estado de los tokens
                 int tokenmetodo=0;
                 int tokenforma=0;
                 int tokenin=0;

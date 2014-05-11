@@ -43,6 +43,7 @@ public class LexicoTest {
         //fail("The test case is a prototype.");
     }
     
+    @Test
     public void TestCorrecto2() throws Exception {
         System.out.println("codigo correcto test2");
         String code2 = "in #00AB34 234 +";
@@ -51,6 +52,7 @@ public class LexicoTest {
         instance2.interpret(code2, ambient2);
     }
     
+    @Test
     public void TestCorrecto3() throws Exception {
         System.out.println("codigo correcto test3");
         String code3 = "- * / ( )";
@@ -59,6 +61,7 @@ public class LexicoTest {
         instance3.interpret(code3, ambient3);
     }
     
+    @Test
     public void TestIncorrecto1() throws Exception {
         System.out.println("codigo incorrecto test1");
         String codeIncorrect1 = "aabb43 #*ef";
@@ -67,6 +70,7 @@ public class LexicoTest {
         instanceIncorrect1.interpret(codeIncorrect1, ambientIncorrect1);
     }
 
+    @Test
     public void TestIncorrecto2() throws Exception {
         System.out.println("codigo incorrecto test2");
         String codeIncorrect2 = "#ed45gbt5 [sdas";
