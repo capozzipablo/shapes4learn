@@ -55,21 +55,10 @@ public class Main {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         };
+        
         String codigo = new String(" create shape saraza in #003AB2 344 + - * / ( ) ; FF456 #00452EU");          
         analizadorLexico.interpret(codigo, ambiente);
-        
-        String codigo2 = new String("hola");
-        Pattern expresionRegularId = Pattern.compile("[[a-zA-z]+[^[hola]]]");
-        Matcher matchId = expresionRegularId.matcher(codigo2);
-        
-        if (matchId.find()) {
-         System.out.println("La palabra cumple el patron");
-     } else {
-         System.out.println("La palabra  no cumple el patron");
-     }
-       
-        
-                       
+                           
     
     }
 }
