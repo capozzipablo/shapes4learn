@@ -53,7 +53,6 @@ public  class Lexico implements Interpreter {
                 int tokenparentesiscierre = 0;
                 int tokennumero = 0;
                 int tokencolor = 0;
-                int tokeninvalido = 0;
                 int tokenfinsentencia = 0;
                 
             try{
@@ -151,7 +150,7 @@ public  class Lexico implements Interpreter {
                                 //Evalua si el lexema es un fin de sentencia
                                 if( array.get(i).equals(";")){
                                     System.out.println(array.get(i)+"(FIN_SENTENCIA)"); 
-                                    tokenparentesiscierre=1;
+                                    tokenfinsentencia=1;
                                     out2.write(array.get(i)+" (FIN_SENTENCIA)");
                                     out2.write(System.getProperty("line.separator"));
                                 }
@@ -179,7 +178,7 @@ public  class Lexico implements Interpreter {
                                   Matcher matchColor = expresionRegularColor.matcher((CharSequence) array.get(i));
                                     if (matchColor.matches()) {
                                     System.out.println(array.get(i)+"(COLOR)"); 
-                                    tokennumero=1;
+                                    tokencolor=1;
                                     out2.write(array.get(i)+" (COLOR)");
                                     out2.write(System.getProperty("line.separator"));
                                   }
@@ -202,30 +201,14 @@ public  class Lexico implements Interpreter {
                                     //El lexema no es válido para el lenguaja shape4learn
                                     else if ( !(matchId.matches()) &&   !(matchColor.matches()) && !(matchNumero.matches()) && !(array.get(i).equals("create")) && !(array.get(i).equals("setcolor")) && !(array.get(i).equals("setbase")) && !(array.get(i).equals("setheight")) && !(array.get(i).equals("setradius")) && !(array.get(i).equals("setposition")) && !(array.get(i).equals("shape")) && !(array.get(i).equals("circle")) && !(array.get(i).equals("rectangle")) && !(array.get(i).equals("in")) && !(array.get(i).equals("+")) && !(array.get(i).equals("-")) && !(array.get(i).equals("*")) && !(array.get(i).equals("/")) && !(array.get(i).equals("(")) && !(array.get(i).equals(")"))  && !(array.get(i).equals(";"))){
                                         System.out.println(array.get(i)+"(TOKEN_INVALIDO)"); 
-                                    tokenid=1;
                                     out2.write(array.get(i)+" (TOKEN_INVALIDO)");
                                     out2.write(System.getProperty("line.separator"));
                                     }
-                                    
-                                    
-//                                    if( !(array.get(i).equals("create"))  && !(array.get(i).equals("setcolor"))                    ){
-//                                    System.out.println(array.get(i)+"(TOKEN_INVALIDO)"); 
-//                                    tokenparentesiscierre=1;
-//                                    out2.write(array.get(i)+" (TOKEN_INVALIDO)");
-//                                    out2.write(System.getProperty("line.separator"));
-//                                }   
-                                
-//                                else{
-//                                    System.out.println(array.get(i)+"(TOKEN_INVALIDO)"); 
-//                                    tokeninvalido=1;
-//                                    out2.write(array.get(i)+" (TOKEN_INVALIDO)");
-//                                    out2.write(System.getProperty("line.separator"));
-//                                    
-//                                }
-                        }
-                                                     
-                            
-                                        
+          
+                    
+
+                        }                                      
+                                                                 
                                 
                                 
                                 
@@ -239,8 +222,8 @@ public  class Lexico implements Interpreter {
                     }
                     
                         
-                System.out.println("Cantidad de tokens encontrados: "+(tokenmetodo+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokeninvalido+tokenfinsentencia));  
-                out.write("Cantidad de tokens encontrados: "+(tokenmetodo+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokeninvalido+tokenfinsentencia));
+                System.out.println("Cantidad de tokens encontrados: "+(tokenmetodo+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokenfinsentencia));  
+                out.write("Cantidad de tokens encontrados: "+(tokenmetodo+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokenfinsentencia));
                 out.write(System.getProperty("line.separator"));
                 out.write(System.getProperty("line.separator"));
                 

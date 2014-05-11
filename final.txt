@@ -1,5 +1,5 @@
 Cantidad de lexemas encontrados: 15
-Cantidad de tokens encontrados: 11
+Cantidad de tokens encontrados: 13
 
 create (METODO)
 shape (FORMA)
