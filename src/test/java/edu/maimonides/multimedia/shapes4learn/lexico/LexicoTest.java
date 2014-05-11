@@ -1,4 +1,3 @@
-
 package edu.maimonides.multimedia.shapes4learn.lexico;
 
 import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
@@ -9,10 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Juan
- */
 public class LexicoTest {
     
     public LexicoTest() {
@@ -65,16 +60,16 @@ public class LexicoTest {
     }
     
     public void TestIncorrecto1() throws Exception {
-        System.out.println("aabb43 #*ef");
-        String codeIncorrect1 = "";
+        System.out.println("codigo incorrecto test1");
+        String codeIncorrect1 = "aabb43 #*ef";
         ShapeAmbient ambientIncorrect1 = null;
         Lexico instanceIncorrect1 = new Lexico();
         instanceIncorrect1.interpret(codeIncorrect1, ambientIncorrect1);
     }
 
     public void TestIncorrecto2() throws Exception {
-        System.out.println("#ed45gbt5 [sdas");
-        String codeIncorrect2 = "";
+        System.out.println("codigo incorrecto test2");
+        String codeIncorrect2 = "#ed45gbt5 [sdas";
         ShapeAmbient ambientIncorrect2 = null;
         Lexico instanceIncorrect2 = new Lexico();
         instanceIncorrect2.interpret(codeIncorrect2, ambientIncorrect2);
