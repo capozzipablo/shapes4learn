@@ -1,0 +1,18 @@
+Cantidad de lexemas encontrados: 15
+Cantidad de tokens encontrados: 11
+
+create (METODO)
+shape (FORMA)
+saraza (ID)
+in (IN)
+#003AB2 (COLOR)
+344 (NUMERO)
++ (OPERADOR_SUMA)
+- (OPERADOR_RESTA)
+* (OPERADOR_PRODUCTO)
+/ (OPERADOR_DIVISION)
+( (PARENTESIS_APERTURA)
+) (PARENTESIS_CIERRE)
+; (FIN_SENTENCIA)
+FF456 (TOKEN_INVALIDO)
+#00452EU (TOKEN_INVALIDO)

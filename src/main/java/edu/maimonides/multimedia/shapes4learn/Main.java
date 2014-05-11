@@ -9,9 +9,11 @@ import edu.maimonides.multimedia.shapes4learn.model.shapes.Circle;
 import edu.maimonides.multimedia.shapes4learn.model.shapes.Rectangle;
 import edu.maimonides.multimedia.shapes4learn.model.shapes.Shape;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -23,7 +25,7 @@ import java.util.regex.Pattern;
 
 public class Main {
    
-    public static void main(String[] args) throws CodeException, FileNotFoundException {
+    public static void main(String[] args) throws CodeException, FileNotFoundException, IOException {
                 
         Lexico analizadorLexico = new Lexico();
         ShapeAmbient ambiente = new ShapeAmbient() {
@@ -53,12 +55,21 @@ public class Main {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         };
-        String codigo = new String("create circle ; 450 in");
-        
+        String codigo = new String(" create shape saraza in #003AB2 344 + - * / ( ) ; FF456 #00452EU");          
         analizadorLexico.interpret(codigo, ambiente);
-            
         
-                
+        String codigo2 = new String("hola");
+        Pattern expresionRegularId = Pattern.compile("[[a-zA-z]+[^[hola]]]");
+        Matcher matchId = expresionRegularId.matcher(codigo2);
+        
+        if (matchId.find()) {
+         System.out.println("La palabra cumple el patron");
+     } else {
+         System.out.println("La palabra  no cumple el patron");
+     }
+       
+        
+                       
     
     }
 }
