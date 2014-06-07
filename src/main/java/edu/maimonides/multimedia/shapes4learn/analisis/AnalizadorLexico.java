@@ -1,47 +1,50 @@
-package edu.maimonides.multimedia.shapes4learn.lexico;
+package edu.maimonides.multimedia.shapes4learn.analisis;
 
-import edu.maimonides.multimedia.shapes4learn.interpreter.CodeException;
-import edu.maimonides.multimedia.shapes4learn.interpreter.Interpreter;
-import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
-import java.io.*;
-import static java.lang.System.in;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+public class AnalizadorLexico {
 
-
-public  class Lexico implements Interpreter {
     //Constructor
-    public Lexico() {
+    public AnalizadorLexico() {
     }
-   
-       
-    //Método de la interfaz Interpreter
-    public void interpret(String code, ShapeAmbient ambient) throws CodeException{
-        
-                //Se crea una lista para almacenar los lexemas
-                ArrayList array = new ArrayList();  
-                 
-                 //Se definen ExpresionesRegulares
-                // Pattern expRegularMetodo = Pattern.compile("[create|setcolor|setbase|setheight|setradius|setposition]");  
-                // Pattern expRegularNumero = Pattern.compile("[0-9]+");
+    
+    //Métodos
+    public List realizaAnalisisLexico(String code){
+        //Se crea una lista para almacenar los lexemas
+        ArrayList array = new ArrayList();  
+                               
+        // se inicializa contador de lexemas 
+        int valor = 0; 
                 
-                 // se inicializa contador de lexemas 
-                 int valor = 0; 
-                
-                //Se procesa el código fuente y se guarda en una lista los distintos lexemas
+       //Se procesa el código fuente y se guarda en una lista los distintos lexemas
                 StringTokenizer tokens = new StringTokenizer(code);
                 while(tokens.hasMoreTokens()){
                         array.add(tokens.nextToken());
                         valor = valor+1;
                 } 
-                                
-                System.out.println("Cantidad de lexemas encontrados:"+ valor);
+   
+        System.out.println("Cantidad de lexemas encontrados:"+ valor);
                 
                 //Se inicializa  el estado de los tokens
-                int tokenmetodo=0;
+                 
+                int tokencreate = 0;
+                int tokensetcolor = 0;
+                int tokensetbase = 0;
+                int tokensetheight = 0;
+                int tokensetradius = 0;
+                int tokensetposition = 0;                
                 int tokenforma=0;
                 int tokenin=0;
                 int tokenid=0;
@@ -55,7 +58,10 @@ public  class Lexico implements Interpreter {
                 int tokencolor = 0;
                 int tokenfinsentencia = 0;
                 
-            try{
+                //Se declara lista que se utilizará como input para el análisis Sintáctico
+                 ArrayList arrayTokens = new ArrayList();
+                
+                try{
                             BufferedWriter out = new BufferedWriter (new FileWriter("final.txt"));
                             out.write("Cantidad de lexemas encontrados: "+ valor );
                             out.write(System.getProperty("line.separator"));
@@ -67,14 +73,71 @@ public  class Lexico implements Interpreter {
                         try{
                         BufferedWriter out2 = new BufferedWriter (new FileWriter("intermedio.txt",true));
                                          
-                                //Evalua si el lexema es un Metodo
-                               if( (array.get(i).equals("create")) || (array.get(i).equals("setcolor")) || (array.get(i).equals("setbase")) || (array.get(i).equals("setheight")) || (array.get(i).equals("setradius")) || (array.get(i).equals("setposition")))
+                                //Evalua si el lexema es un Metodo create
+                               if( array.get(i).equals("create")) //|| (array.get(i).equals("setcolor")) || (array.get(i).equals("setbase")) || (array.get(i).equals("setheight")) || (array.get(i).equals("setradius")) || (array.get(i).equals("setposition")))
                                {
-                                    System.out.println(array.get(i)+"(METODO)");
-                                    tokenmetodo=1;
-                                    out2.write(array.get(i)+" (METODO)");
-                                     out2.write(System.getProperty("line.separator"));
+                                    System.out.println(array.get(i)+"(CREATE)");
+                                    tokencreate=1;
+                                    out2.write(array.get(i)+" (CREATE)");
+                                    out2.write(System.getProperty("line.separator"));
+                                    
+                                     //Se guarda token en la lista
+                                    arrayTokens.add("CREATE");
+                                    
                                }
+                               
+                               //Evalua si el lexema es un Metodo setcolor
+                               if(array.get(i).equals("setcolor")){
+                                    System.out.println(array.get(i)+"(SETCOLOR)");
+                                    tokensetcolor=1;
+                                    out2.write(array.get(i)+" (SETCOLOR)");
+                                     out2.write(System.getProperty("line.separator"));
+                              
+                                     arrayTokens.add("SETCOLOR");
+                               }
+                               
+                               //Evalua si el lexema es un Metodo setbase
+                               if(array.get(i).equals("setbase")){
+                                    System.out.println(array.get(i)+"(SETBASE)");
+                                    tokensetbase=1;
+                                    out2.write(array.get(i)+" (SETBASE)");
+                                     out2.write(System.getProperty("line.separator"));
+                                     
+                                     arrayTokens.add("SETBASE");
+                               }
+                               
+                               //Evalua si el lexema es un Metodo setheight
+                               if(array.get(i).equals("setheight")){
+                                    System.out.println(array.get(i)+"(SETHEIGHT)");
+                                    tokensetheight=1;
+                                    out2.write(array.get(i)+" (SETHEIGHT)");
+                                     out2.write(System.getProperty("line.separator"));
+                                     
+                                     arrayTokens.add("SETHEIGHT");
+                              }
+                               
+                               //Evalua si el lexema es un Metodo setradius
+                               if(array.get(i).equals("setradius")){
+                                    System.out.println(array.get(i)+"(SETRADIUS)");
+                                    tokensetradius=1;
+                                    out2.write(array.get(i)+" (SETRADIUS)");
+                                     out2.write(System.getProperty("line.separator"));
+                                     
+                                     arrayTokens.add("SETRADIUS");
+                               
+                               }
+                               
+                               //Evalua si el lexema es un Metodo setposition
+                               if(array.get(i).equals("setposition")){
+                                    System.out.println(array.get(i)+"(SETPOSITION)");
+                                    tokensetposition=1;
+                                    out2.write(array.get(i)+" (SETPOSITION)");
+                                     out2.write(System.getProperty("line.separator"));
+                                     
+                                    arrayTokens.add("SETPOSITION"); 
+                               
+                               }
+                                                         
                                 //Evalua si el lexema es una Forma
                               
                                   if( (array.get(i).equals("shape")) || (array.get(i).equals("rectangle")) || (array.get(i).equals("circle"))){
@@ -82,7 +145,9 @@ public  class Lexico implements Interpreter {
                                     tokenforma=1;
                                     out2.write(array.get(i)+" (FORMA)");
                                     out2.write(System.getProperty("line.separator"));
-                                }
+                               
+                                    arrayTokens.add("FORMA");
+                                  }
                                                        
                                 //Evalua  si el lexema es un in
                                   
@@ -91,7 +156,9 @@ public  class Lexico implements Interpreter {
                                     tokenin=1;
                                     out2.write(array.get(i)+" (IN)");
                                     out2.write(System.getProperty("line.separator"));
-                                }
+                                
+                                    arrayTokens.add("IN");
+                                   }
                     
                                 
                                 //Evalua  si el lexema es un +
@@ -101,7 +168,10 @@ public  class Lexico implements Interpreter {
                                     tokensuma=1;
                                     out2.write(array.get(i)+" (OPERADOR_SUMA)");
                                     out2.write(System.getProperty("line.separator"));
-                                }
+                                    
+                                    arrayTokens.add("OPERADOR_SUMA");
+                                   
+                                     }
                                 
                                       
                                 //Evalua  si el lexema es un -
@@ -110,7 +180,9 @@ public  class Lexico implements Interpreter {
                                     tokenresta=1;
                                     out2.write(array.get(i)+" (OPERADOR_RESTA)");
                                     out2.write(System.getProperty("line.separator"));
-                                }
+                                    
+                                    arrayTokens.add("OPERADOR_RESTA");
+                               }
                                            
                                 
                                 //Evalua  si el lexema es un *
@@ -119,7 +191,9 @@ public  class Lexico implements Interpreter {
                                     tokenproducto=1;
                                     out2.write(array.get(i)+" (OPERADOR_PRODUCTO)");
                                     out2.write(System.getProperty("line.separator"));
-                                }
+                                
+                                    arrayTokens.add("OPERADOR_PRODUCTO");
+                               }
                                                        
                                 //Evalua  si el lexema es un /
                                 if( array.get(i).equals("/")){
@@ -127,6 +201,8 @@ public  class Lexico implements Interpreter {
                                     tokendivision=1;
                                     out2.write(array.get(i)+" (OPERADOR_DIVISION)");
                                     out2.write(System.getProperty("line.separator"));
+                                
+                                    arrayTokens.add("OPERADOR_DIVISION");
                                 }
                                 
                                   
@@ -136,7 +212,9 @@ public  class Lexico implements Interpreter {
                                     tokenparentesisapertura=1;
                                     out2.write(array.get(i)+" (PARENTESIS_APERTURA)");
                                     out2.write(System.getProperty("line.separator"));
-                                }          
+                                
+                                    arrayTokens.add("PARENTESIS_APERTURA");
+                               }          
                                                  
                                 
                                 //Evalua  si el lexema es un )
@@ -145,6 +223,9 @@ public  class Lexico implements Interpreter {
                                     tokenparentesiscierre=1;
                                     out2.write(array.get(i)+" (PARENTESIS_CIERRE)");
                                     out2.write(System.getProperty("line.separator"));
+                                    
+                                    arrayTokens.add("PARENTESIS_CIERRE");
+                                
                                 }      
                                 
                                 //Evalua si el lexema es un fin de sentencia
@@ -153,6 +234,8 @@ public  class Lexico implements Interpreter {
                                     tokenfinsentencia=1;
                                     out2.write(array.get(i)+" (FIN_SENTENCIA)");
                                     out2.write(System.getProperty("line.separator"));
+                                
+                                    arrayTokens.add("FIN_SENTENCIA");
                                 }
                                 
                                 
@@ -168,7 +251,9 @@ public  class Lexico implements Interpreter {
                                     tokennumero=1;
                                     out2.write(array.get(i)+" (NUMERO)");
                                     out2.write(System.getProperty("line.separator"));
-                                } 
+                                
+                                    arrayTokens.add("NUMERO");
+                                    } 
                                 
                                 /*Evalua si el lexema es un color
                                   Se define expresión regular  
@@ -181,7 +266,9 @@ public  class Lexico implements Interpreter {
                                     tokencolor=1;
                                     out2.write(array.get(i)+" (COLOR)");
                                     out2.write(System.getProperty("line.separator"));
-                                  }
+                                  
+                                    arrayTokens.add("COLOR");    
+                                    }
                                 
                                 /*Evalua si el lexema es un identificador
                                   Se define expresión regular  
@@ -196,22 +283,20 @@ public  class Lexico implements Interpreter {
                                     tokenid=1;
                                     out2.write(array.get(i)+" (ID)");
                                     out2.write(System.getProperty("line.separator"));
-                                }
+                                
+                                    arrayTokens.add("ID");
+                                    }
                                     
                                     //El lexema no es válido para el lenguaja shape4learn
                                     else if ( !(matchId.matches()) &&   !(matchColor.matches()) && !(matchNumero.matches()) && !(array.get(i).equals("create")) && !(array.get(i).equals("setcolor")) && !(array.get(i).equals("setbase")) && !(array.get(i).equals("setheight")) && !(array.get(i).equals("setradius")) && !(array.get(i).equals("setposition")) && !(array.get(i).equals("shape")) && !(array.get(i).equals("circle")) && !(array.get(i).equals("rectangle")) && !(array.get(i).equals("in")) && !(array.get(i).equals("+")) && !(array.get(i).equals("-")) && !(array.get(i).equals("*")) && !(array.get(i).equals("/")) && !(array.get(i).equals("(")) && !(array.get(i).equals(")"))  && !(array.get(i).equals(";"))){
-                                        System.out.println(array.get(i)+"(TOKEN_INVALIDO)"); 
+                                    System.out.println(array.get(i)+"(TOKEN_INVALIDO)"); 
                                     out2.write(array.get(i)+" (TOKEN_INVALIDO)");
                                     out2.write(System.getProperty("line.separator"));
+                                    
+                                    arrayTokens.add("TOKEN_INVALIDO");
                                     }
-          
-                    
-
                         }                                      
-                                                                 
-                                
-                                
-                                
+                                           
                                           
                                         
                     out2.close();
@@ -220,10 +305,9 @@ public  class Lexico implements Interpreter {
                     }
                                         
                     }
-                    
-                        
-                System.out.println("Cantidad de tokens encontrados: "+(tokenmetodo+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokenfinsentencia));  
-                out.write("Cantidad de tokens encontrados: "+(tokenmetodo+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokenfinsentencia));
+                 
+                System.out.println("Cantidad de tokens encontrados: "+(tokencreate+tokensetcolor+tokensetbase+tokensetheight+tokensetradius+tokensetposition+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokenfinsentencia));  
+                out.write("Cantidad de tokens encontrados: "+(tokencreate+tokensetcolor+tokensetbase+tokensetheight+tokensetradius+tokensetposition+tokenforma+tokenin+tokenid+tokensuma+tokenresta+tokenproducto+tokendivision+tokenparentesisapertura+tokenparentesiscierre+tokennumero+tokencolor+tokenfinsentencia));
                 out.write(System.getProperty("line.separator"));
                 out.write(System.getProperty("line.separator"));
                 
@@ -250,7 +334,16 @@ public  class Lexico implements Interpreter {
                 
                 File intermedio = new File ("intermedio.txt");
                 intermedio.delete();
+        
+                
+                return arrayTokens;
                
-    }
-       
-}
+                   }
+   
+} 
+        
+    
+
+
+
+

@@ -1,7 +1,7 @@
 package edu.maimonides.multimedia.shapes4learn;
 
 import edu.maimonides.multimedia.shapes4learn.interpreter.CodeException;
-import edu.maimonides.multimedia.shapes4learn.lexico.Lexico;
+import edu.maimonides.multimedia.shapes4learn.analisis.PabloInterprete;
 import edu.maimonides.multimedia.shapes4learn.model.Color;
 import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
 import edu.maimonides.multimedia.shapes4learn.model.exceptions.InexistentShapeException;
@@ -27,7 +27,6 @@ public class Main {
    
     public static void main(String[] args) throws CodeException, FileNotFoundException, IOException {
                 
-        Lexico analizadorLexico = new Lexico();
         ShapeAmbient ambiente = new ShapeAmbient() {
 
             @Override
@@ -56,9 +55,12 @@ public class Main {
             }
         };
         
-        String codigo = new String(" create shape saraza in #003AB2 344 + - * / ( ) ; FF456 #00452EU");          
-        analizadorLexico.interpret(codigo, ambiente);
-                           
+        String codigo = new String("create create saraza 40 ;");          
+        
+        PabloInterprete pabloInterprete = new PabloInterprete();
+        pabloInterprete.interpret(codigo, ambiente);
+       
+        
     
     }
 }

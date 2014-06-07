@@ -1,5 +1,8 @@
-Cantidad de lexemas encontrados: 2
-Cantidad de tokens encontrados: 0
+Cantidad de lexemas encontrados: 5
+Cantidad de tokens encontrados: 4
 
-#ed45gbt5 (TOKEN_INVALIDO)
-[sdas (TOKEN_INVALIDO)
+create (CREATE)
+create (CREATE)
+saraza (ID)
+40 (NUMERO)
+; (FIN_SENTENCIA)

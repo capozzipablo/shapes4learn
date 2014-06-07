@@ -1,5 +1,6 @@
 package edu.maimonides.multimedia.shapes4learn.lexico;
 
+import edu.maimonides.multimedia.shapes4learn.analisis.PabloInterprete;
 import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,7 +38,7 @@ public class LexicoTest {
         System.out.println("codigo correcto test1");
         String code1 = "create shape saraza";
         ShapeAmbient ambient1 = null;
-        Lexico instance1 = new Lexico();
+        PabloInterprete instance1 = new PabloInterprete();
         instance1.interpret(code1, ambient1);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -48,7 +49,7 @@ public class LexicoTest {
         System.out.println("codigo correcto test2");
         String code2 = "in #00AB34 234 +";
         ShapeAmbient ambient2 = null;
-        Lexico instance2 = new Lexico();
+        PabloInterprete instance2 = new PabloInterprete();
         instance2.interpret(code2, ambient2);
     }
     
@@ -57,7 +58,7 @@ public class LexicoTest {
         System.out.println("codigo correcto test3");
         String code3 = "- * / ( )";
         ShapeAmbient ambient3 = null;
-        Lexico instance3 = new Lexico();
+        PabloInterprete instance3 = new PabloInterprete();
         instance3.interpret(code3, ambient3);
     }
     
@@ -66,7 +67,7 @@ public class LexicoTest {
         System.out.println("codigo incorrecto test1");
         String codeIncorrect1 = "aabb43 #*ef";
         ShapeAmbient ambientIncorrect1 = null;
-        Lexico instanceIncorrect1 = new Lexico();
+        PabloInterprete instanceIncorrect1 = new PabloInterprete();
         instanceIncorrect1.interpret(codeIncorrect1, ambientIncorrect1);
     }
 
@@ -75,7 +76,7 @@ public class LexicoTest {
         System.out.println("codigo incorrecto test2");
         String codeIncorrect2 = "#ed45gbt5 [sdas";
         ShapeAmbient ambientIncorrect2 = null;
-        Lexico instanceIncorrect2 = new Lexico();
+        PabloInterprete instanceIncorrect2 = new PabloInterprete();
         instanceIncorrect2.interpret(codeIncorrect2, ambientIncorrect2);
     }
 
