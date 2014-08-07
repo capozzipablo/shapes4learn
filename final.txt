@@ -1,8 +1,8 @@
-Cantidad de lexemas encontrados: 5
-Cantidad de tokens encontrados: 4
+Cantidad de lexemas encontrados: 6
+Cantidad de tokens encontrados: 5
 
-create (CREATE)
-create (CREATE)
-saraza (ID)
-40 (NUMERO)
+setcolor (SETCOLOR)
+in (IN)
+shape (FORMA)
+gtgt (ID)
 ; (FIN_SENTENCIA)

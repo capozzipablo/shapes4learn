@@ -1,7 +1,8 @@
 package edu.maimonides.multimedia.shapes4learn;
 
+import edu.maimonides.multimedia.shapes4learn.analisis.AnalizadorLexico;
 import edu.maimonides.multimedia.shapes4learn.interpreter.CodeException;
-import edu.maimonides.multimedia.shapes4learn.analisis.PabloInterprete;
+
 import edu.maimonides.multimedia.shapes4learn.model.Color;
 import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
 import edu.maimonides.multimedia.shapes4learn.model.exceptions.InexistentShapeException;
@@ -55,11 +56,17 @@ public class Main {
             }
         };
         
-        String codigo = new String("create create saraza 40 ;");          
+        /*
+         Ingrese solamente una sentencia. La misma será analizada por las diferentes
+         etapas de un compilador
         
-        PabloInterprete pabloInterprete = new PabloInterprete();
-        pabloInterprete.interpret(codigo, ambiente);
-       
+        */
+        
+        String codigo = new String("setcolor #aa33cc in shape gtgt ;");          
+        
+
+          AnalizadorLexico lexico = new AnalizadorLexico();
+          lexico.interpret(codigo, ambiente);
         
     
     }

@@ -1,5 +1,8 @@
 package edu.maimonides.multimedia.shapes4learn.analisis;
 
+import edu.maimonides.multimedia.shapes4learn.interpreter.CodeException;
+import edu.maimonides.multimedia.shapes4learn.interpreter.Interpreter;
+import edu.maimonides.multimedia.shapes4learn.model.ShapeAmbient;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -13,15 +16,23 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-public class AnalizadorLexico {
+
+public class AnalizadorLexico implements Interpreter{
 
     //Constructor
     public AnalizadorLexico() {
     }
     
     //Métodos
-    public List realizaAnalisisLexico(String code){
+    @Override
+    public void interpret(String code, ShapeAmbient ambient) throws CodeException {
         //Se crea una lista para almacenar los lexemas
         ArrayList array = new ArrayList();  
                                
@@ -290,10 +301,8 @@ public class AnalizadorLexico {
                                     //El lexema no es válido para el lenguaja shape4learn
                                     else if ( !(matchId.matches()) &&   !(matchColor.matches()) && !(matchNumero.matches()) && !(array.get(i).equals("create")) && !(array.get(i).equals("setcolor")) && !(array.get(i).equals("setbase")) && !(array.get(i).equals("setheight")) && !(array.get(i).equals("setradius")) && !(array.get(i).equals("setposition")) && !(array.get(i).equals("shape")) && !(array.get(i).equals("circle")) && !(array.get(i).equals("rectangle")) && !(array.get(i).equals("in")) && !(array.get(i).equals("+")) && !(array.get(i).equals("-")) && !(array.get(i).equals("*")) && !(array.get(i).equals("/")) && !(array.get(i).equals("(")) && !(array.get(i).equals(")"))  && !(array.get(i).equals(";"))){
                                     System.out.println(array.get(i)+"(TOKEN_INVALIDO)"); 
-                                    out2.write(array.get(i)+" (TOKEN_INVALIDO)");
-                                    out2.write(System.getProperty("line.separator"));
+                                      
                                     
-                                    arrayTokens.add("TOKEN_INVALIDO");
                                     }
                         }                                      
                                            
@@ -336,11 +345,142 @@ public class AnalizadorLexico {
                 intermedio.delete();
         
                 
-                return arrayTokens;
+                //Preparación Tp2
+                String inputtp2 = "";
+                for(int i =0; i < array.size();i++){
+                    if(array.get(i) != null){
+                        inputtp2 = inputtp2 + array.get(i) + " ";
+                    }
+                }
+                
+                String pp = (String) array.get(0);
+                String sp = (String) array.get(1);
+                String cp = (String) array.get(3);
+                
+                //Se invoca el Parser para el Tp2
+            CharStream input = new ANTLRInputStream(inputtp2);
+            GramaticaLexer lexer = new GramaticaLexer(input);
+            CommonTokenStream tokensTP2 = new CommonTokenStream(lexer);
+            GramaticaParser parsertp2 = new GramaticaParser(tokensTP2);                
+            
+            
+            //Se evalua cada expresión para generar el AST
+            if (pp.equals("create")){
+                if (sp.equals("shape")){
+                    
+                    parsertp2.setBuildParseTree(true);  
+                    ParseTree tree = parsertp2.sentenciacreateshape();
+                    
+                    GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                    visitor.visitSentenciacreateshape((GramaticaParser.SentenciacreateshapeContext) tree);
+                   
+       
+                }
+                if (sp.equals("rectangle")){
+                    
+                    parsertp2.setBuildParseTree(true);  
+                    ParseTree tree = parsertp2.sentenciacreaterectangle();
+                    
+                    GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                    visitor.visitSentenciacreaterectangle((GramaticaParser.SentenciacreaterectangleContext) tree);
+                   
+                }
+                if (sp.equals("circle")){
+                    parsertp2.setBuildParseTree(true); 
+                    ParseTree tree = parsertp2.sentenciacreatecircle();
+                    
+                    GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                    visitor.visitSentenciacreatecircle((GramaticaParser.SentenciacreatecircleContext) tree);
+                   
+                }
+            }
+            
+            if (pp.equals("setcolor")){
+                if (cp.equals("shape")){
+                    parsertp2.setBuildParseTree(true); 
+                    ParseTree tree = parsertp2.sentenciasetcolorshape();
+                    
+                    GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                    visitor.visitSentenciasetcolorshape((GramaticaParser.SentenciasetcolorshapeContext) tree);
+                   
+                }
+                if (cp.equals("rectangle")){
+                    
+                    parsertp2.setBuildParseTree(true);
+                    ParseTree tree = parsertp2.sentenciasetcolorrectangle();
+                    
+                    GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                    visitor.visitSentenciasetcolorrectangle((GramaticaParser.SentenciasetcolorrectangleContext) tree);
+          
+                }
+                if (cp.equals("circle")){
+                    parsertp2.setBuildParseTree(true);
+                    ParseTree tree = parsertp2.sentenciasetcolorcircle();
+                    GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                    visitor.visitSentenciasetcolorcircle((GramaticaParser.SentenciasetcolorcircleContext) tree);
+                   
+                }
+            }
+            
+            if (pp.equals("setbase")){
+                parsertp2.setBuildParseTree(true);    
+                ParseTree tree = parsertp2.sentenciasetbase();
+                GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                visitor.visitSentenciasetbase((GramaticaParser.SentenciasetbaseContext) tree);
+        
+            }
+            
+            if (pp.equals("setheight")){
+                parsertp2.setBuildParseTree(true);    
+                ParseTree tree = parsertp2.sentenciasetheight();
+                GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                visitor.visitSentenciasetheight((GramaticaParser.SentenciasetheightContext) tree);
+            
+            }
+            
+            if (pp.equals("setradius")){
+                parsertp2.setBuildParseTree(true);       
+                ParseTree tree = parsertp2.sentenciasetradius();
+                GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                visitor.visitSentenciasetradius((GramaticaParser.SentenciasetradiusContext) tree);
+            
+            }
+            
+            if (pp.equals("setposition")){
+                parsertp2.setBuildParseTree(true);     
+                ParseTree tree = parsertp2.sentenciasetposition();
+                GramaticaBaseVisitor visitor = new GramaticaBaseVisitor();
+                visitor.visitSentenciasetposition((GramaticaParser.SentenciasetpositionContext) tree);
+                
+            }
+                
+                
+                
                
-                   }
+                
+    
+    
+    
+    
+        }
+            
+             
+             
+             
+            
+            
+    
    
-} 
+
+
+
+
+
+
+
+}
+   
+
         
     
 

@@ -16,6 +16,19 @@
 	        </configuration>
 	      </plugin>
               <plugin>
+                    <groupId>org.antlr</groupId>
+                    <artifactId>antlr4-maven-plugin</artifactId>
+                    <version>4.2.2</version>
+                    <executions>
+                        <execution>
+                            <id>antlr</id>
+                            <goals>
+                                <goal>antlr4</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+              </plugin>
+              <plugin>
 	        <groupId>org.codehaus.mojo</groupId>
 	        <artifactId>exec-maven-plugin</artifactId>
 	        <version>1.2.1</version>
@@ -36,7 +49,8 @@
                     <mainClass>edu.maimonides.multimedia.shapes4learn</mainClass>               
                 </configuration>
 	      </plugin>
-     </plugins>
+              
+      </plugins>
   </build>
   <dependencies>
   	<dependency>
@@ -59,5 +73,11 @@
 		<artifactId>commons-lang</artifactId>
 	<version>2.6</version>
 	</dependency>
-    </dependencies>
+        <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr4</artifactId>
+      <version>4.2.2</version>
+      <classifier>complete</classifier>
+    </dependency>        
+  </dependencies>
 </project>
